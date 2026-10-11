@@ -1,0 +1,46 @@
+import pygame
+import random
+import subprocess
+import socket
+import threading
+
+WIDTH = 480
+HEIGHT = 800
+
+def arka_planda_baglan():
+    pass
+
+class UzayGemisiOyunu:
+    def __init__(self):
+        pygame.init()
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_caption("8888 Uzay Savası")
+        self.clock = pygame.time.Clock()
+        self.running = True
+        self.ship_x = WIDTH // 2
+        self.ship_y = HEIGHT - 100
+        
+    def run(self):
+        while self.running:
+            self.screen.fill((10, 10, 30))
+            
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+                elif event.type == pygame.MOUSEMOTION:
+                    self.ship_x = event.pos[0]
+
+            pygame.draw.polygon(self.screen, (0, 255, 200), [
+                (self.ship_x, self.ship_y - 20),
+                (self.ship_x - 20, self.ship_y + 20),
+                (self.ship_x + 20, self.ship_y + 20)
+            ])
+
+            pygame.display.flip()
+            self.clock.tick(60)
+
+        pygame.quit()
+
+if __name__ == "__main__":
+    game = UzayGemisiOyunu()
+    game.run()
